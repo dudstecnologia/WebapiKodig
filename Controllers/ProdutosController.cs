@@ -27,13 +27,15 @@ namespace WebapiKodig.Controllers
         }
 
         [HttpGet("{codigo}")]
-        public async Task<ActionResult<Produto>> produtoUnico(string codigo)
+        public async Task<IActionResult> produtoUnico(string codigo)
         {
             var product = await _context.Produtos.FindAsync(codigo);
  
             if (product == null) return NotFound();
+
+            var etiquetas = _context.Etiquetas.Where(e => e.PRODUTO == product.CODIGO).ToList();
  
-            return product;
+            return Json(new {produto = product, etiquetas = etiquetas });
         }
 
         [HttpPost]
