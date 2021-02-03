@@ -43,7 +43,7 @@ namespace WebapiKodig.Controllers
 
             await _context.SaveChangesAsync();
  
-            return CreatedAtAction("GetProducts", new { id = produto.CODIGO }, produto);
+            return CreatedAtAction("produtoUnico", new { codigo = produto.CODIGO }, produto);
         }
 
         [HttpPut("{codigo}")]
